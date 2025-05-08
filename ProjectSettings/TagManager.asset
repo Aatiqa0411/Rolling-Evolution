@@ -6,6 +6,16 @@ TagManager:
   tags:
   - Ground
   - Obstacle
+  - AcidGreen
+  - Blue
+  - Green
+  - Orange
+  - Purple
+  - Red
+  - SeaGreen
+  - Pink
+  - pickup
+  - Coin
   layers:
   - Default
   - TransparentFX

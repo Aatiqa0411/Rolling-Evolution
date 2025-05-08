@@ -1,34 +1,21 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour
+public class CameraFollow : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    private Vector2 moveInput;
+    public Transform player;
+    public Vector3 offset = new Vector3(0, 5, -7);
+    public float smoothSpeed = 5f;
 
-    private PlayerControls controls;
-
-    private void Awake()
+    void LateUpdate()
     {
-        controls = new PlayerControls();
+        if (player == null) return;
 
-        controls.CameraControls.MoveCamera.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
-        controls.CameraControls.MoveCamera.canceled += ctx => moveInput = Vector2.zero;
-    }
+        // Match rotation
+        Quaternion targetRotation = Quaternion.Euler(30f, player.eulerAngles.y, 0f);
+        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothSpeed);
 
-    private void OnEnable()
-    {
-        controls.CameraControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        controls.CameraControls.Disable();
-    }
-
-    private void Update()
-    {
-        Vector3 move = new Vector3(moveInput.x, 0, moveInput.y) * moveSpeed * Time.deltaTime;
-        transform.Translate(move, Space.World);
+        // Follow position
+        Vector3 desiredPosition = player.position + player.TransformDirection(offset);
+        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);
     }
 }
