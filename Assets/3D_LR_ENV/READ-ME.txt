@@ -1,0 +1,10 @@
+This pack was modeled using Blender 4.0 and Substance Painter. You can use the models as you wish in any projects you want!
+
+- The models are in fbx format
+- The textures are in 128 to 512, according to the UV and object size
+
+This pack was created for a mockup scene, so there are some issues, such as certain parts of the UV being diagonal, etc. But I hope the pack may be helpful for you!
+
+Made by Gabriel Arantes, 2024 (@turinscot) https://turinscot.itch.io
+
+Credit is not necessary, but appreciated

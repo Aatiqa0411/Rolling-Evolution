@@ -48,39 +48,6 @@
                     "action": "MoveCamera",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "down",
-                    "id": "22f3167e-ac66-420b-92fb-e239c47a9489",
-                    "path": "<Keyboard>/downArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "left",
-                    "id": "071a5ce4-6f3d-4937-b297-a48ba5e5f2d1",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "right",
-                    "id": "cd053d28-df44-4a65-b54d-78b698012574",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveCamera",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 }
             ]
         }

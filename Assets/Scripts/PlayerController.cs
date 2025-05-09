@@ -4,58 +4,40 @@ public class PlayerController : MonoBehaviour
 {
     public float moveSpeed = 5f;
     public float turnSpeed = 100f;
-    public float jumpForce = 7f;
+
     private float rotationInput = 0f;
 
-    private Rigidbody rb;
-    private bool isGrounded;
-
-    void Start()
+   void Update()
+{
+    // Move only when Up Arrow is held
+    if (Input.GetKey(KeyCode.UpArrow))
     {
-        rb = GetComponent<Rigidbody>();
+        Vector3 moveDirection = transform.forward;
+       transform.Translate(Vector3.right * moveSpeed * Time.deltaTime, Space.World);
     }
 
-    void Update()
+    // Apply rotation (from button click)
+    if (rotationInput != 0)
     {
-        // Movement input
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        transform.Rotate(0f, rotationInput * turnSpeed * Time.deltaTime, 0f);
+    }
+}
 
-        // Move the player using Rigidbody (better for collision handling)
-        Vector3 move = new Vector3(horizontal, 0f, vertical).normalized * moveSpeed;
-        Vector3 newPosition = transform.position + move * Time.deltaTime;
-        rb.MovePosition(newPosition);  // Move with Rigidbody, respecting physics
 
-        // Rotate the player based on input (still using local space)
-        if (rotationInput != 0)
-        {
-            transform.Rotate(0f, rotationInput * turnSpeed * Time.deltaTime, 0f);
-        }
 
-        // Jump input
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        {
-            rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-            isGrounded = false;
-        }
+    // Call these from UI Button clicks
+    public void TurnLeft()
+    {
+        rotationInput = -1f;
     }
 
-    public void TurnLeft() => rotationInput = -1f;
-    public void TurnRight() => rotationInput = 1f;
-    public void StopTurning() => rotationInput = 0f;
-
-    void OnCollisionEnter(Collision collision)
+    public void TurnRight()
     {
-        // Handle ground collision (for jumping)
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGrounded = true;
-        }
+        rotationInput = 1f;
+    }
 
-        // Detect collision with obstacles
-        if (collision.gameObject.CompareTag("Obstacle"))
-        {
-            Debug.Log("Collided with Obstacle");
-        }
+    public void StopTurning()
+    {
+        rotationInput = 0f;
     }
 }
