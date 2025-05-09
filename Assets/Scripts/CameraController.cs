@@ -3,19 +3,26 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform player;
-    public Vector3 offset = new Vector3(0, 5, -7);
-    public float smoothSpeed = 5f;
+    public float followDistance = 5f;
+    public float heightOffset = 1f;  // Change this value to set camera height
+    public float followSpeed = 5f;
+    public float rotationSpeed = 5f;
 
     void LateUpdate()
     {
         if (player == null) return;
 
-        // Match rotation
-        Quaternion targetRotation = Quaternion.Euler(30f, player.eulerAngles.y, 0f);
-        transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, Time.deltaTime * smoothSpeed);
+        // Calculate position behind the player
+        Vector3 behindPosition = player.position - player.forward * followDistance;
 
-        // Follow position
-        Vector3 desiredPosition = player.position + player.TransformDirection(offset);
-        transform.position = Vector3.Lerp(transform.position, desiredPosition, Time.deltaTime * smoothSpeed);
+        // Set camera height
+        behindPosition.y = player.position.y + heightOffset;
+
+        // Smooth follow
+        transform.position = Vector3.Lerp(transform.position, behindPosition, Time.deltaTime * followSpeed);
+
+        // Rotate to look at the player
+        Quaternion lookRotation = Quaternion.LookRotation(player.position - transform.position);
+        transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
     }
 }
