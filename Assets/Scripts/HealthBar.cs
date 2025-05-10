@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class HealthBar : MonoBehaviour
 {
@@ -37,5 +38,10 @@ public class HealthBar : MonoBehaviour
         Time.timeScale = 0f; // Pause game
         gameOverPanel.SetActive(true);
         gameOverText.text = "GAME OVER\nYour Score: " + playerController.score;
+    }
+    public void ReplayGame()
+    {
+        Time.timeScale = 1f; // Resume time before restarting
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
