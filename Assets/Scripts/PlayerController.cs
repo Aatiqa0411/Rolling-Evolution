@@ -33,13 +33,13 @@ public class PlayerController : MonoBehaviour
     {
         Vector3 moveInput = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKey(KeyCode.UpArrow) || Input.GetKey(KeyCode.W))
             moveInput += Vector3.forward;
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKey(KeyCode.DownArrow) || Input.GetKey(KeyCode.S))
             moveInput += Vector3.back;
-        if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A))
             moveInput += Vector3.left;
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D))
             moveInput += Vector3.right;
 
         // Convert input to camera-relative movement
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         camRight.Normalize();
 
         Vector3 move = (camForward * moveInput.z + camRight * moveInput.x).normalized;
-        rb.AddForce(move * moveForce);
+        rb.AddForce(move * moveForce * Time.deltaTime);
     }
 
 

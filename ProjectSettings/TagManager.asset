@@ -16,6 +16,7 @@ TagManager:
   - Pink
   - pickup
   - Coin
+  - LVL4-Liquid
   layers:
   - Default
   - TransparentFX
