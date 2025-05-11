@@ -50,4 +50,10 @@ public class LevelComplete : MonoBehaviour
             Debug.Log("No next level. End of game?");
         }
     }
+
+    public void GoHome()
+    {
+        Time.timeScale = 1f; // Unpause the game if it's paused
+        SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with your scene name
+    }
 }
