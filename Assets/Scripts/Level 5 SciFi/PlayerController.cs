@@ -10,13 +10,17 @@ public class PlayerController : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreText;
     public VariableJoystick joystick;
-
+    public int score_add=5;
+    public int score_sub=2;
     public HealthBar healthManager;
+    public Renderer ballRenderer;
     void Start()
     {
+        ballRenderer = GetComponent<Renderer>(); 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = false;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        ballRenderer = GetComponent<Renderer>(); 
         score = 0;
         UpdateScoreUI();
     }
@@ -77,7 +81,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Coin"))
         {
-            score += 5;
+            score = score + score_add;
             UpdateScoreUI();
             Destroy(other.gameObject);
         }
@@ -88,15 +92,13 @@ public class PlayerController : MonoBehaviour
         }
         if(other.CompareTag("Obstacle"))
         {
-            score-=2;
+            score = score - score_sub;
             UpdateScoreUI();
             healthManager.TakeDamage(30);
-        
-            // Add your lose logic here
-        }
-    }
 
-    
+        }
+       
+    }
 
     private void OnTriggerExit(Collider other)
     {
@@ -106,6 +108,14 @@ public class PlayerController : MonoBehaviour
             UpdateScoreUI();
         }
     }
+
+    public void ChangeBallColor(Color newColor)
+{
+    if (ballRenderer != null)
+    {
+        ballRenderer.material.color = newColor;
+    }
+}
 
     private void UpdateScoreUI()
     {
