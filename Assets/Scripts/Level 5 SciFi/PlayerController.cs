@@ -10,13 +10,20 @@ public class PlayerController : MonoBehaviour
     public int score = 0;
     public TextMeshProUGUI scoreText;
     public VariableJoystick joystick;
-
+    public int score_add=5;
+    public int score_sub=2;
     public HealthBar healthManager;
+    public Renderer ballRenderer;
+    public GameObject FinishPanel;
+    public TextMeshProUGUI Text; 
     void Start()
     {
+        ballRenderer = GetComponent<Renderer>(); 
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = false;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+        ballRenderer = GetComponent<Renderer>(); 
+        FinishPanel.SetActive(false);
         score = 0;
         UpdateScoreUI();
     }
@@ -77,7 +84,7 @@ public class PlayerController : MonoBehaviour
 
         if (other.CompareTag("Coin"))
         {
-            score += 5;
+            score = score + score_add;
             UpdateScoreUI();
             Destroy(other.gameObject);
         }
@@ -88,24 +95,45 @@ public class PlayerController : MonoBehaviour
         }
         if(other.CompareTag("Obstacle"))
         {
-            score-=2;
+            score = score - score_sub;
             UpdateScoreUI();
             healthManager.TakeDamage(30);
-        
-            // Add your lose logic here
-        }
-    }
 
-    
+        }
+       
+    }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.CompareTag("Coin"))
         {
+            score += 5;
+            UpdateScoreUI();
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Obstacle"))
+        {
             score -= 5;
             UpdateScoreUI();
+            healthManager.TakeDamage(30);
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Finish"))
+        {
+            FinishPanel.SetActive(true);
+            Time.timeScale = 0f; // Pause game
+            FinishPanel.SetActive(true);
+            Text.text = "GAME OVER\nYour Score: " + score;
         }
     }
+
+    public void ChangeBallColor(Color newColor)
+{
+    if (ballRenderer != null)
+    {
+        ballRenderer.material.color = newColor;
+    }
+}
 
     private void UpdateScoreUI()
     {
