@@ -17,6 +17,7 @@ TagManager:
   - pickup
   - Coin
   - water
+  - Bridge
   layers:
   - Default
   - TransparentFX

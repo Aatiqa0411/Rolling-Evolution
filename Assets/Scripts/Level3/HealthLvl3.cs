@@ -11,21 +11,34 @@ public class HealthLvl3 : MonoBehaviour
     public GameObject gameOverPanel;       // Reference to the GameOver UI panel
     public TextMeshProUGUI scoreText;      // Reference to TextMeshPro for displaying score
 
+    private bool isOnBridge = false;
+
     void Start()
     {
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
         gameOverPanel.SetActive(false); // Hide game over UI at start
-        
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("water"))
+        if (other.CompareTag("Bridge"))
         {
-             Debug.Log("Ball entered the water trigger!");
-            TakeDamage(20); // Reduce 35 health on hitting water
+            isOnBridge = true;
+        }
+        else if (other.CompareTag("water") && !isOnBridge)
+        {
+            Debug.Log("Ball entered the water trigger!");
+            TakeDamage(20); // Only take damage if not on bridge
+        }
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Bridge"))
+        {
+            isOnBridge = false;
         }
     }
 
@@ -46,7 +59,6 @@ public class HealthLvl3 : MonoBehaviour
         Time.timeScale = 0f; // Pause game
         gameOverPanel.SetActive(true);
 
-        // Show score from ScoreManager
         if (ScoreManager.instance != null)
         {
             scoreText.SetText("GAME OVER\nYour Score: {0}", ScoreManager.instance.score);

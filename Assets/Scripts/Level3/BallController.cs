@@ -11,8 +11,10 @@ public class BallController : MonoBehaviour
     [Header("References")]
     public Rigidbody rb;
     public VariableJoystick joystick;
+    public GameObject mud;
 
     private bool isGrounded = true;
+    private float currentYRotation = 0f;
 
     void Start()
     {
@@ -23,13 +25,15 @@ public class BallController : MonoBehaviour
 
     void FixedUpdate()
     {
-        Vector3 move = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
-        rb.AddForce(move * moveSpeed);
+        Vector3 inputDirection = new Vector3(joystick.Horizontal, 0, joystick.Vertical);
+        Vector3 rotatedDirection = Quaternion.Euler(0, currentYRotation, 0) * inputDirection;
+
+        rb.AddForce(rotatedDirection * moveSpeed);
     }
 
     void Update()
     {
-        // Jump if joystick is pushed up and grounded
+        // Jump if joystick pushed up and grounded
         if (joystick.Vertical > 0.8f && isGrounded)
         {
             Jump();
@@ -49,5 +53,26 @@ public class BallController : MonoBehaviour
         {
             isGrounded = true;
         }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == mud)
+        {
+            ScoreManager.instance.SubtractPoints(2);
+        }
+    }
+
+    // Turn Functions
+    public void MoveLeft()
+    {
+        transform.Rotate(0, -90, 0);
+        currentYRotation -= 90f;
+    }
+
+    public void MoveRight()
+    {
+        transform.Rotate(0, 90, 0);
+        currentYRotation += 90f;
     }
 }
