@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "Rolling_Evolution.sln"
+    "dotnet.defaultSolution": "Rolling-Evolution.sln"
 }
