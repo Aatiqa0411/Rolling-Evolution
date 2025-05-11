@@ -44,4 +44,17 @@ public class Lvl2HealthBar : MonoBehaviour
         Time.timeScale = 1f; // Resume time before restarting
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void LoadNextLevel()
+    {
+        Time.timeScale = 1f; // Unpause if paused
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
+    public void GoHome()
+    {
+        Time.timeScale = 1f; // Unpause the game if it's paused
+        SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with your scene name
+    }
 }

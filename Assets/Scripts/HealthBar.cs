@@ -44,4 +44,10 @@ public class HealthBar : MonoBehaviour
         Time.timeScale = 1f; // Resume time before restarting
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
+
+    public void GoHome()
+    {
+        Time.timeScale = 1f; // Unpause the game if it's paused
+        SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with your scene name
+    }
 }
