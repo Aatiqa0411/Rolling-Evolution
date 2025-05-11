@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class BallGameplay : MonoBehaviour
 {
@@ -8,11 +9,13 @@ public class BallGameplay : MonoBehaviour
     public float health = 100f;
     public float healthDrainRate = 10f;
     public float checkInterval = 1f;
-    public BallMovement movementScript;
+    public PlayerMovement4 movementScript;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI coinMessageText;
     public GameObject finishPanel;
+    public GameObject gameOverPanel;
     public GameObject exitObstacle;
+    public HealthBar4 healthBar;
 
     private float originalSpeed;
     private float nextHealthDrainTime = 0f;
@@ -33,12 +36,17 @@ public class BallGameplay : MonoBehaviour
         {
             nextHealthDrainTime = Time.time + checkInterval;
             health -= healthDrainRate;
+
+            if (healthBar != null)
+                healthBar.SetHealth(health);
+
             if (movementScript != null)
-                movementScript.moveSpeed = originalSpeed / 2f;
+                movementScript.moveSpeed = originalSpeed / 3f;
 
             if (health <= 0)
                 GameOver();
         }
+
         else if (!IsOnLiquid() && movementScript != null)
         {
             movementScript.moveSpeed = originalSpeed;
@@ -83,16 +91,24 @@ public class BallGameplay : MonoBehaviour
         {
             int remaining = Mathf.Max(0, coinsToUnlock - score);
             coinMessageText.text = remaining > 0 ?
-                $"Collect {remaining} more coins to unlock gate." : "";
+                $"Collect {remaining} more coins to unlock gate!" : "";
         }
     }
 
     void GameOver()
     {
         Time.timeScale = 0f;
-        if (finishPanel != null)
-            finishPanel.SetActive(true);
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
         if (coinMessageText != null)
             coinMessageText.text = "GAME OVER\nYou ran out of health.";
     }
+
+    public void LoadNextLevel()
+    {
+        Time.timeScale = 1f; // Unpause if paused
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
+    }
+
 }
