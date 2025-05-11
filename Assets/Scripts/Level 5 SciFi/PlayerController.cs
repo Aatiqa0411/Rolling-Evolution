@@ -14,6 +14,8 @@ public class PlayerController : MonoBehaviour
     public int score_sub=2;
     public HealthBar healthManager;
     public Renderer ballRenderer;
+    public GameObject FinishPanel;
+    public TextMeshProUGUI Text; 
     void Start()
     {
         ballRenderer = GetComponent<Renderer>(); 
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = false;
         rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
         ballRenderer = GetComponent<Renderer>(); 
+        FinishPanel.SetActive(false);
         score = 0;
         UpdateScoreUI();
     }
@@ -104,8 +107,23 @@ public class PlayerController : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
+            score += 5;
+            UpdateScoreUI();
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Obstacle"))
+        {
             score -= 5;
             UpdateScoreUI();
+            healthManager.TakeDamage(30);
+            Destroy(other.gameObject);
+        }
+        if (other.CompareTag("Finish"))
+        {
+            FinishPanel.SetActive(true);
+            Time.timeScale = 0f; // Pause game
+            FinishPanel.SetActive(true);
+            Text.text = "GAME OVER\nYour Score: " + score;
         }
     }
 
