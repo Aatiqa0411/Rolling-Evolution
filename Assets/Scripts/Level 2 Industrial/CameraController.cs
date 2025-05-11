@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraFollow2 : MonoBehaviour
 {
     public Transform target;          // drag the ball here
     public float distance  = 10f;     // how far behind

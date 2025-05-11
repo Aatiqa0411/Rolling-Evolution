@@ -2,7 +2,7 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerController : MonoBehaviour
+public class PlayerController2 : MonoBehaviour
 {
     public float moveForce = 10f;
     public float jumpForce = 5f;
