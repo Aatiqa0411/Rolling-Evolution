@@ -12,7 +12,7 @@ public class Lvl2BallController : MonoBehaviour
     public Lvl2HealthBar healthManager;
     public GameObject FinishPanel;
     public TextMeshProUGUI FinishPanelText;
-    public int score = 0;
+    // public int score = 0;
 
     private Rigidbody rb;
     private bool isGrounded = true;
@@ -72,15 +72,16 @@ public class Lvl2BallController : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             Debug.Log("Obstacle hit: " + collision.gameObject.name);
-            score -= 2;
+            // score -= 2;
+            GameManager.Instance.AddScore(-2);
             UpdateScoreUI();
-            healthManager.TakeDamage(30);
+            healthManager.TakeDamage(20); //can take damage 5 times
         } else if (collision.gameObject.CompareTag("Finish"))
         {
             Debug.Log("Reached the ending: " + collision.gameObject.name);
             Time.timeScale = 0f;
             FinishPanel.SetActive(true);
-            FinishPanelText.text = "LEVEL FINISHED\nYOUR SCORE : 0" + score;
+            FinishPanelText.text = "LEVEL FINISHED\nYOUR SCORE : " + GameManager.Instance.Score;
         }
 
     }
@@ -89,7 +90,8 @@ public class Lvl2BallController : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            score += 5;
+            // score += 5;
+            GameManager.Instance.AddScore(5);
             UpdateScoreUI();
             Destroy(other.gameObject);
         }
@@ -99,7 +101,8 @@ public class Lvl2BallController : MonoBehaviour
     {
         if (other.CompareTag("Coin"))
         {
-            score -= 5;
+            // score -= 5;
+            GameManager.Instance.AddScore(-5);
             UpdateScoreUI();
         }
     }
@@ -108,7 +111,7 @@ public class Lvl2BallController : MonoBehaviour
     {
         if (scoreText != null)
         {
-            scoreText.text = "Score: " + score;
+            scoreText.text = "Score: " + GameManager.Instance.Score;
         }
     }
 
