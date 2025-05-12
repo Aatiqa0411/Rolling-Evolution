@@ -12,6 +12,8 @@ public class Lvl2BallController : MonoBehaviour
     public Lvl2HealthBar healthManager;
     public GameObject FinishPanel;
     public TextMeshProUGUI FinishPanelText;
+    public ParticleSystem dustTrail;
+
     // public int score = 0;
 
     private Rigidbody rb;
@@ -32,8 +34,71 @@ public class Lvl2BallController : MonoBehaviour
         {
             HandleJump();
         }
-
+        HandleDustTrail();
     }
+
+    void HandleDustTrail()
+{
+    Vector3 rayOrigin = transform.position + Vector3.down * 0.5f;
+    float rayLength = 1f;
+
+    if (Physics.Raycast(rayOrigin, Vector3.down, out RaycastHit hit, rayLength))
+    {
+        //Debug.Log("Is active: " + dustTrail.gameObject.activeInHierarchy); // should be true
+
+        if (hit.collider.CompareTag("Ground"))
+        {
+            //Debug.Log("Raycast hit ground");
+
+            //Debug.Log("Velocity: " + rb.velocity.magnitude);
+
+            if (rb.velocity.magnitude > 0f)
+            {
+                if (!dustTrail.isPlaying)
+                {
+                    // //Debug.Log("Playing trail...");
+                    if (!dustTrail.gameObject.activeInHierarchy)
+                    {
+                        dustTrail.gameObject.SetActive(true);
+                    }
+
+                    Vector3 direction = rb.velocity.normalized;
+                    Quaternion rotation = Quaternion.LookRotation(-direction); // Trail goes opposite to movement
+                    dustTrail.transform.rotation = rotation;
+                    
+                    dustTrail.Play();
+                    //Debug.Log("Now playing: " + dustTrail.isPlaying);
+                }
+            }
+            else
+            {
+                if (dustTrail.isPlaying)
+                {
+                    //Debug.Log("Velocity too low, stopping trail...");
+                    dustTrail.Stop();
+                }
+            }
+        }
+        else
+        {
+            if (dustTrail.isPlaying)
+            {
+                //Debug.Log("Not ground, stopping trail...");
+                dustTrail.Stop();
+            }
+        }
+    }
+    else
+    {
+        if (dustTrail.isPlaying)
+        {
+            //Debug.Log("Raycast missed, stopping trail...");
+            dustTrail.Stop();
+        }
+    }
+}
+
+
 
     void HandleMovement()
     {
@@ -48,18 +113,25 @@ public class Lvl2BallController : MonoBehaviour
             moveDirection = transform.TransformDirection(moveDirection); // Use local rotation
             rb.MovePosition(rb.position + moveDirection * moveSpeed * Time.deltaTime);
         }
+
+        // if (rb.velocity.magnitude > 0.5f && !dustTrail.isPlaying)
+        // {
+        //     dustTrail.Play();
+        //     Debug.Log("Movement: " + dustTrail.isPlaying);
+        // }
     }
 
     void HandleJump()
     {
-        // if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
-        // {
-        //     rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-        //     isGrounded = false;
-        // }
 
         rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isGrounded = false;
+
+        // if (dustTrail.isPlaying)
+        // {    
+        //     dustTrail.Stop();
+        //     Debug.Log("Jumping: " + dustTrail.isPlaying);
+        // }
 
     }
 
@@ -97,15 +169,15 @@ public class Lvl2BallController : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("Coin"))
-        {
-            // score -= 5;
-            GameManager.Instance.AddScore(-5);
-            UpdateScoreUI();
-        }
-    }
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if (other.CompareTag("Coin"))
+    //     {
+    //         // score -= 5;
+    //         GameManager.Instance.AddScore(-5);
+    //         UpdateScoreUI();
+    //     }
+    // }
 
     private void UpdateScoreUI()
     {
