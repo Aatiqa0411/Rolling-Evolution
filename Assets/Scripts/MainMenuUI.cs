@@ -41,7 +41,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void LoadLevel4()
     {
-        // SceneManager.LoadScene("Level 4"); // Sticky Zone
+         SceneManager.LoadScene("Level 4"); // Sticky Zone
     }
 
     public void LoadLevel5()

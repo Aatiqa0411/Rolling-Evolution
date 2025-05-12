@@ -1999,7 +1999,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 458585919}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e98168109ecd768438c0615d014080b6, type: 3}
+  m_Script: {fileID: 11500000, guid: 24102390d33356a4fb495f0c39307693, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 1753209502}
@@ -2358,7 +2358,7 @@ MonoBehaviour:
   healthSlider: {fileID: 522886458}
   maxHealth: 100
   currentHealth: 100
-  playerController: {fileID: 1753209506}
+  playerController: {fileID: 0}
   gameOverPanel: {fileID: 759028714}
   PausePanel: {fileID: 593456068}
   gameOverText: {fileID: 1739451896}
@@ -4726,7 +4726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -508, y: 273}
+  m_AnchoredPosition: {x: -695, y: 229}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &986319125
@@ -7998,7 +7998,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1753209497}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6513d75f2fba74f419fccb91f4716010, type: 3}
+  m_Script: {fileID: 11500000, guid: 2859dd955d1140a4f809b8e86d62d5f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 5
@@ -8011,7 +8011,7 @@ MonoBehaviour:
   healthManager: {fileID: 522886457}
   ballRenderer: {fileID: 0}
   FinishPanel: {fileID: 1548312838}
-  Text: {fileID: 68304381}
+  Text: {fileID: 1739451896}
 --- !u!1001 &1772949990
 PrefabInstance:
   m_ObjectHideFlags: 0
