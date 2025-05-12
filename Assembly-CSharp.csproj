@@ -64,9 +64,9 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.61f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Level3\GameOverHandler.cs" />
     <Compile Include="Assets\BOXOPHOBIC\Utils\Scripts\CommonUtils\CamController.cs" />
     <Compile Include="Assets\Scripts\MainMenuUI.cs" />
+    <Compile Include="Assets\Scripts\PauseButton.cs" />
     <Compile Include="Assets\BOXOPHOBIC\Utils\Scripts\StyledInspector\StyledMessage.cs" />
     <Compile Include="Assets\Scripts\Level3\LevelComplete.cs" />
     <Compile Include="Assets\Scripts\Level 2 Industrial\Lvl2CameraController.cs" />
@@ -146,6 +146,7 @@
     <Compile Include="Assets\Scripts\Level 5 SciFi\CameraController.cs" />
     <Compile Include="Assets\BOXOPHOBIC\Utils\Scripts\StyledInspector\StyledInteractive.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\TMP_TextInfoDebugTool.cs" />
+    <Compile Include="Assets\Scripts\Level3\GameOverHandler.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
@@ -1050,10 +1051,6 @@
       <HintPath>Library\ScriptAssemblies\Unity.Cloud.Common.Runtime.Embedded.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.Cloud.Assets.Embedded">
       <HintPath>Library\ScriptAssemblies\Unity.Cloud.Assets.Embedded.dll</HintPath>
       <Private>False</Private>
@@ -1064,6 +1061,14 @@
     </Reference>
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.VisualStudio.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.Cloud.AppLinking.Embedded">
+      <HintPath>Library\ScriptAssemblies\Unity.Cloud.AppLinking.Embedded.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
@@ -1078,16 +1083,12 @@
       <HintPath>Library\ScriptAssemblies\Unity.Cloud.Identity.Embedded.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Cloud.AppLinking.Embedded">
-      <HintPath>Library\ScriptAssemblies\Unity.Cloud.AppLinking.Embedded.dll</HintPath>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Formats.Fbx.Runtime">
@@ -1096,6 +1097,10 @@
     </Reference>
     <Reference Include="Unity.Cloud.Common.Embedded">
       <HintPath>Library\ScriptAssemblies\Unity.Cloud.Common.Embedded.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Unity.AssetManager.Upload.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.AssetManager.Upload.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.Flow">
@@ -1118,8 +1123,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.InputSystem.ForUI">
-      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+    <Reference Include="Unity.Cloud.AppLinking.Editor.Embedded">
+      <HintPath>Library\ScriptAssemblies\Unity.Cloud.AppLinking.Editor.Embedded.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.TestTools.CodeCoverage.Editor.OpenCover.Mono.Reflection">
@@ -1130,8 +1135,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.Cloud.Identity.Editor.Embedded.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Cloud.AppLinking.Editor.Embedded">
-      <HintPath>Library\ScriptAssemblies\Unity.Cloud.AppLinking.Editor.Embedded.dll</HintPath>
+    <Reference Include="Unity.InputSystem.ForUI">
+      <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
@@ -1166,8 +1171,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Autodesk.Fbx.Editor">
-      <HintPath>Library\ScriptAssemblies\Autodesk.Fbx.Editor.dll</HintPath>
+    <Reference Include="Unity.Cloud.Identity.Runtime.Embedded">
+      <HintPath>Library\ScriptAssemblies\Unity.Cloud.Identity.Runtime.Embedded.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.Mathematics">
@@ -1190,8 +1195,8 @@
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="Unity.Cloud.Identity.Runtime.Embedded">
-      <HintPath>Library\ScriptAssemblies\Unity.Cloud.Identity.Runtime.Embedded.dll</HintPath>
+    <Reference Include="Autodesk.Fbx.Editor">
+      <HintPath>Library\ScriptAssemblies\Autodesk.Fbx.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Unity.VisualScripting.State">
@@ -1208,10 +1213,6 @@
     </Reference>
     <Reference Include="Unity.Animation.Rigging">
       <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="Unity.AssetManager.Upload.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.AssetManager.Upload.Editor.dll</HintPath>
       <Private>False</Private>
     </Reference>
   </ItemGroup>

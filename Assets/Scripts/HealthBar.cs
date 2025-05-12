@@ -10,6 +10,7 @@ public class HealthBar : MonoBehaviour
     public int currentHealth;
     public PlayerController playerController; // Reference to the PlayerController script
     public GameObject gameOverPanel;
+    public GameObject PausePanel;
     public TextMeshProUGUI gameOverText;     // Text to show "Your Score: X"
    
 
@@ -18,7 +19,8 @@ public class HealthBar : MonoBehaviour
         currentHealth = maxHealth;
         healthSlider.maxValue = maxHealth;
         healthSlider.value = currentHealth;
-        gameOverPanel.SetActive(false); // Hide game over UI at start
+        gameOverPanel.SetActive(false);
+        PausePanel.SetActive(false); // Hide game over UI at start
     }
 
     public void TakeDamage(int damage)
@@ -49,5 +51,15 @@ public class HealthBar : MonoBehaviour
     {
         Time.timeScale = 1f; // Unpause the game if it's paused
         SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with your scene name
+    }
+    public void Pause()
+    {
+        PausePanel.SetActive(true);  // Show pause menu
+        Time.timeScale = 0f;          // Freeze the game
+    }
+     public void Resume()
+    {
+        PausePanel.SetActive(false); // Hide pause menu
+        Time.timeScale = 1f;          // Resume the game
     }
 }

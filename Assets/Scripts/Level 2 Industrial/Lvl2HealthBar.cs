@@ -11,7 +11,7 @@ public class Lvl2HealthBar : MonoBehaviour
     public Lvl2BallController playerController; // Reference to the Ball
     public GameObject gameOverPanel;
     public TextMeshProUGUI gameOverText;     // Text to show "Your Score: X"
-   
+    public GameObject PausePanel;
 
     void Start()
     {
@@ -57,4 +57,15 @@ public class Lvl2HealthBar : MonoBehaviour
         Time.timeScale = 1f; // Unpause the game if it's paused
         SceneManager.LoadScene("MainMenu"); // Replace "MainMenu" with your scene name
     }
+     public void Pause()
+    {
+        PausePanel.SetActive(true);  // Show pause menu
+        Time.timeScale = 0f;          // Freeze the game
+    }
+     public void Resume()
+    {
+        PausePanel.SetActive(false); // Hide pause menu
+        Time.timeScale = 1f;          // Resume the game
+    }
+    
 }

@@ -10,7 +10,7 @@ public class HealthLvl3 : MonoBehaviour
     public int currentHealth;
     public GameObject gameOverPanel;       // Reference to the GameOver UI panel
     public TextMeshProUGUI scoreText;      // Reference to TextMeshPro for displaying score
-
+    public GameObject PausePanel;
     private bool isOnBridge = false;
 
     void Start()
@@ -69,5 +69,15 @@ public class HealthLvl3 : MonoBehaviour
     {
         Time.timeScale = 1f; // Resume time before restarting
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void Pause()
+    {
+        PausePanel.SetActive(true);  // Show pause menu
+        Time.timeScale = 0f;          // Freeze the game
+    }
+     public void Resume()
+    {
+        PausePanel.SetActive(false); // Hide pause menu
+        Time.timeScale = 1f;          // Resume the game
     }
 }
