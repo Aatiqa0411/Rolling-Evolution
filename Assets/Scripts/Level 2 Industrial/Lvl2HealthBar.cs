@@ -37,7 +37,7 @@ public class Lvl2HealthBar : MonoBehaviour
     {
         Time.timeScale = 0f; // Pause game
         gameOverPanel.SetActive(true);
-        gameOverText.text = "GAME OVER\nYour Score: " + playerController.score;
+        gameOverText.text = "GAME OVER\nYour Score: " + GameManager.Instance.Score;
     }
     public void ReplayGame()
     {
