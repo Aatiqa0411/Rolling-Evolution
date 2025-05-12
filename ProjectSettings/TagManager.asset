@@ -16,7 +16,9 @@ TagManager:
   - Pink
   - pickup
   - Coin
-  - LVL4-Liquid
+  - water
+  - Bridge
+  - Manager
   layers:
   - Default
   - TransparentFX
