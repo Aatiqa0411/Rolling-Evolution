@@ -9,7 +9,7 @@ public class MainMenuUI : MonoBehaviour
     public void StartGame()
     {
         // SceneManager.LoadScene("Level 1"); 
-        SceneManager.LoadScene("Level 2 IndustrialZone"); // Added for testing
+        SceneManager.LoadScene("Level1"); // Added for testing
     }
 
     // Called when "Levels" is clicked
@@ -26,7 +26,7 @@ public class MainMenuUI : MonoBehaviour
 
     public void LoadLevel1()
     {
-        // SceneManager.LoadScene("Level 1"); // Testin Lab
+        SceneManager.LoadScene("Level1"); // Testin Lab
     }
 
     public void LoadLevel2()

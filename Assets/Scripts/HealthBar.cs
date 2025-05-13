@@ -39,6 +39,7 @@ public class HealthBar : MonoBehaviour
     {
         Time.timeScale = 0f; // Pause game
         gameOverPanel.SetActive(true);
+       
         gameOverText.text = "GAME OVER\nYour Score: " + playerController.score;
     }
     public void ReplayGame()
