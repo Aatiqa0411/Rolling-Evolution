@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -90,8 +91,11 @@ public class PlayerController : MonoBehaviour
         }
         if(other.CompareTag("Finish"))
         {
-            Debug.Log("You win!");
-            // Add your win logic here
+            FinishPanel.SetActive(true);
+            Time.timeScale = 0f; // Pause game
+            FinishPanel.SetActive(true);
+            Text.text = "LEVEL FINISHED\nYour Score: " + score;
+
         }
         if(other.CompareTag("Obstacle"))
         {
@@ -123,7 +127,7 @@ public class PlayerController : MonoBehaviour
             FinishPanel.SetActive(true);
             Time.timeScale = 0f; // Pause game
             FinishPanel.SetActive(true);
-            Text.text = "GAME OVER\nYour Score: " + score;
+            Text.text = "LEVEL FINISHED\nYour Score: " + score;
         }
     }
 
@@ -151,6 +155,12 @@ public class PlayerController : MonoBehaviour
     public void TurnRight()
     {
         transform.Rotate(0, 90, 0); // Turn right (clockwise)
+    }
+    public void LoadNextLevel()
+    {
+        Time.timeScale = 1f; // Unpause if paused
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        SceneManager.LoadScene(currentSceneIndex + 1);
     }
 
 
