@@ -13,7 +13,7 @@ public class RotateInPlace : MonoBehaviour
 {
     if (other.CompareTag("Player"))
     {
-        PlayerController player = other.GetComponent<PlayerController>(); // ✅ assign here
+        PlayerController player = other.GetComponent<PlayerController>();
 
         if (player == null) return; // safety check
 
@@ -38,7 +38,7 @@ public class RotateInPlace : MonoBehaviour
             player.ChangeBallColor(new Color(0.5f, 0f, 1f));
         }
 
-        Destroy(gameObject); // ✅ destroy the potion, not the player
+        Destroy(gameObject); // It destroy the potion, not the player
     }
 }
 

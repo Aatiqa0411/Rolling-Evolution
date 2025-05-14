@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CoinsRotation : MonoBehaviour
 {
-    // Update is called once per frame
+    
     public float rotationSpeed = 100f; // degrees per second
     void Update()
     {

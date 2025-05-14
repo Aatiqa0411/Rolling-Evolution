@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class SplashScreen : MonoBehaviour
 {
-    public float delay = 3f; // adjust based on your animation length
+    public float delay = 3f; 
 
     void Start()
     {
@@ -12,6 +12,6 @@ public class SplashScreen : MonoBehaviour
 
     void LoadMainMenu()
     {
-        SceneManager.LoadScene("MainMenu"); // Make sure this matches your scene name
+        SceneManager.LoadScene("MainMenu"); 
     }
 }
